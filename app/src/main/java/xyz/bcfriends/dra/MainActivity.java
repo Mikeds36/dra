@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.btn_push_listener:
                     btnPushListener(v);
                     break;
+                default:
+                    break;
             }
         }
 
