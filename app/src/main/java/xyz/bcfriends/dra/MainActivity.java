@@ -17,7 +17,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final NotificationManager notificationManager = (NotificationManager) MainActivity.this.getSystemService(NOTIFICATION_SERVICE);
-        final Intent intent = new Intent(MainActivity.this.getApplicationContext(), MainActivity.class);
+        final Intent intent = new Intent(this, MainActivity.class);
+
+//        Intent testIntent = new Intent(this, MainActivity.class);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
         notificationManager.createNotificationChannel(channel);
 
         Button btn = findViewById(R.id.push_btn);
+        /* TODO:
+            - 알림을 클릭하면 팝업화면이 나와서 버튼을 클릭할 수 있게 하기
+        */
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.notification_icon)
-                        .setContentTitle("알림 테스트")
-                        .setContentText("Hello World!")
+                        .setContentTitle("Dra")
+                        .setContentText("오늘의 기분은 어떠신가요?")
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         // Set the intent that will fire when the user taps the notification
                         .setContentIntent(pendingIntent)

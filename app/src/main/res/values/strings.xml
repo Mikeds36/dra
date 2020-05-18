@@ -2,4 +2,9 @@
     <string name="app_name">dra</string>
     <string name="channel_name">알림 채널</string>
     <string name="channel_description">테스트용 알림 채널</string>
+    <string name="apply">Apply</string>
+    <string name="DGone">1</string>
+    <string name="DGtwo">2</string>
+    <string name="DGthree">3</string>
+    <string name="DGfour">4</string>
 </resources>
