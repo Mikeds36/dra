@@ -19,14 +19,33 @@ public class UserPromptDialog extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.user_prompt, container, false);
 
-        Button btn_confirm = v.findViewById(R.id.btn_confirm);
-        btn_confirm.setOnClickListener(new View.OnClickListener() {
+        Button btn_a = v.findViewById(R.id.btn_a);
+        btn_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onButtonClicked("Detected!");
                 dismiss();
             }
         });
+
+        Button btn_b = v.findViewById(R.id.btn_b);
+        btn_b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onButtonClicked("Detected!");
+                dismiss();
+            }
+        });
+
+        Button btn_c = v.findViewById(R.id.btn_c);
+        btn_c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onButtonClicked("Detected!");
+                dismiss();
+            }
+        });
+
         return v;
     }
 
