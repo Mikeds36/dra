@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         final NotificationImpl noti = new NotificationImpl(this);
         noti.createNotificationChannel(CHANNEL_ID, "알림 채널", "테스트용 알림 채널");
         Button btn = findViewById(R.id.push_btn);
-        final Intent intent = new Intent(this, MainActivity.class);
+        final Intent intent = new Intent(this, UserPromptActivity.class);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
