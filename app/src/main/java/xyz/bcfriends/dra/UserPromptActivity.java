@@ -21,7 +21,6 @@ public class UserPromptActivity extends AppCompatActivity implements UserPromptD
     @Override
     public void onButtonClicked(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
-        finish();
     }
 
     @Override
