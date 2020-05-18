@@ -16,10 +16,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_btns);
 
-        BtnOnClickListener BonClickListener = new BtnOnClickListener();
+        BtnOnClickListener btnClickListener = new BtnOnClickListener();
 
         Button btn = findViewById(R.id.btn_push_listener);
-        btn.setOnClickListener(BonClickListener);
+        btn.setOnClickListener(btnClickListener);
     }
 
 
