@@ -30,6 +30,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
+    /*
+    Table Name: Records
+        date DEFAULT date(now, localtime),
+        datetime DEFAULT datetime(now, localtime),
+        depressStatus INT(1)
+        note TEXT
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_NAME +
@@ -61,10 +68,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public Cursor getDepressStatus(LocalDate startDate, LocalDate endDate) {
+    // Get Data from records
+    public Cursor getData(LocalDate startDate, LocalDate endDate) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE date > " + startDate + " AND date < " + endDate, null);
     }
 
     public boolean updateNote(LocalDate date, String note) {

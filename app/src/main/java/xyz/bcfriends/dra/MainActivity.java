@@ -9,11 +9,14 @@ import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -33,10 +36,27 @@ public class MainActivity extends AppCompatActivity {
             LocalDate ld = LocalDate.now();
             ld.with(TemporalAdjusters.firstDayOfMonth());
 
-            Cursor res = dbh.getDepressStatus(ld.with(TemporalAdjusters.firstDayOfMonth()), ld.with(TemporalAdjusters.lastDayOfMonth()));
+            Cursor res = dbh.getData(ld.with(TemporalAdjusters.firstDayOfMonth()), ld.with(TemporalAdjusters.lastDayOfMonth()));
+
+            String date;
+            String datetime;
+            int depressStatus;
+            String note;
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
             while (res.moveToNext()) {
+                date = res.getString(res.getColumnIndex("date"));
+                datetime = res.getString(res.getColumnIndex("datetime"));
+                depressStatus = res.getInt(res.getColumnIndex("depressStatus"));
+                note = res.getString(res.getColumnIndex("note"));
 
+                LocalDate dbLD = LocalDate.parse(date);
+
+                calendar.set(dbLD.getYear(), dbLD.getMonthValue(), dbLD.getDayOfMonth());
+
+                events.add(new EventDay(calendar, R.drawable.notification_icon));
             }
 
             calendarView.setDate(calendar);
