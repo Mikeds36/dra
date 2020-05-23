@@ -15,7 +15,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         noti.createNotificationChannel(CHANNEL_ID, "Alarm", "정기 알람 채널");
         Intent notificationIntent = new Intent(context, UserPromptActivity.class);
 
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
