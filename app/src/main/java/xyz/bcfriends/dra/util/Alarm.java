@@ -14,7 +14,6 @@ public interface Alarm {
     void saveScheduleTime(Calendar scheduleTime);
 
     interface Presenter {
-        void scheduleAlarm();
         void scheduleAlarm(@NonNull Calendar alarmTime);
         void cancelAlarm();
         Calendar getScheduleTime();
