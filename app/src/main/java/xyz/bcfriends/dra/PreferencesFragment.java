@@ -1,16 +1,20 @@
 package xyz.bcfriends.dra;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class PreferencesFragment extends PreferenceFragmentCompat {
     SharedPreferences prefs;
@@ -24,32 +28,35 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        int hourOfDay, minute;
         super.onPreferenceTreeClick(preference);
-        Calendar cal = Calendar.getInstance();
-        final AlarmScheduler alarmScheduler = new AlarmScheduler(requireActivity(), prefs);
+        final Intent alarmIntent = new Intent(requireActivity(), DailyAlarmReceiver.class);
+        final PendingIntent pendingIntent = PendingIntent.getBroadcast(requireActivity(), 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        final AlarmPresenter presenter = new AlarmPresenter(requireActivity(), prefs, pendingIntent);
 
         switch (preference.getKey()) {
             case "alarm_daily":
                 if (prefs.getBoolean("alarm_daily", false)) {
-                    alarmScheduler.scheduleNotification();
+                    presenter.scheduleAlarm();
                 }
                 else {
-                    alarmScheduler.cancelNotification();
+                    presenter.cancelAlarm();
                 }
                 break;
             case "alarm_time":
-                hourOfDay = prefs.getInt("hourOfDay", cal.get(Calendar.HOUR_OF_DAY));
-                minute = prefs.getInt("minute", cal.get(Calendar.MINUTE));
+                Calendar cal = presenter.getScheduleTime();
+                int hourOfDay, minute;
+
+                hourOfDay = cal.get(Calendar.HOUR_OF_DAY);
+                minute = cal.get(Calendar.MINUTE);
 
                 TimePickerDialog dialog = new TimePickerDialog(requireActivity(), new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putInt("hourOfDay", hourOfDay);
-                        editor.putInt("minute", minute);
-                        editor.apply();
-                        alarmScheduler.scheduleNotification();
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        cal.set(Calendar.MINUTE, minute);
+                        presenter.scheduleAlarm(cal);
                     }
                 }, hourOfDay, minute, false);
 
@@ -71,5 +78,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
         }
 
         return true;
+    }
+
+    public void showAlarmMessage(Calendar scheduleTime) {
+        String nextNotifyDate = new SimpleDateFormat("yyyy년 MM월 dd일 a hh시 mm분", Locale.getDefault()).format(scheduleTime.getTime());
+        Toast.makeText(requireActivity(), nextNotifyDate + "으로 알림이 설정되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }

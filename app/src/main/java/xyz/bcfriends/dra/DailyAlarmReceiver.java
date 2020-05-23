@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 
-public class AlarmReceiver extends BroadcastReceiver {
+public class DailyAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String CHANNEL_ID = "alarm_receiver";
