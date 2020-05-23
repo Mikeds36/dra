@@ -1,4 +1,4 @@
-package xyz.bcfriends.dra;
+package xyz.bcfriends.dra.util;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
