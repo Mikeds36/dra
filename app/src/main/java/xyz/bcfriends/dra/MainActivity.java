@@ -1,13 +1,17 @@
 package xyz.bcfriends.dra;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.exceptions.OutOfDateRangeException;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -61,6 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
             calendarView.setDate(calendar);
             calendarView.setEvents(events);
+
+            calendarView.setOnDayClickListener(eventDay -> {
+                BottomSheetDialog bottomSheetDialog = BottomSheetDialog.getInstance();
+
+                bottomSheetDialog.show(getSupportFragmentManager(), "bottomSheet");
+            });
 
         } catch (OutOfDateRangeException e) {
             e.printStackTrace();

@@ -7,4 +7,9 @@
     <string name="DGtwo">2</string>
     <string name="DGthree">3</string>
     <string name="DGfour">4</string>
+    <string name="feeling_bad">Feeling_Bad</string>
+    <string name="feeling_sad">Feeling_Sad</string>
+    <string name="feeling_normal">Feeling_Normal</string>
+    <string name="feeling_good">Feeling_Good</string>
+    <string name="feeling_nice">Feeling_Nice</string>
 </resources>
