@@ -67,7 +67,7 @@ public class AlarmImpl implements Alarm {
 
     public Calendar loadScheduleTime() {
         if (!(prefs.contains("hourOfDay") && prefs.contains("minute"))) {
-            return null;
+            return Calendar.getInstance();
         }
 
         Calendar cal = Calendar.getInstance();
