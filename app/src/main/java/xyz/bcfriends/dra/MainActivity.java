@@ -1,62 +1,40 @@
 package xyz.bcfriends.dra;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
-import android.app.PendingIntent;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.test_btns);
-
-        BtnOnClickListener btnClickListener = new BtnOnClickListener();
-
-        Button btn = findViewById(R.id.btn_push_listener);
-        btn.setOnClickListener(btnClickListener);
+        setContentView(R.layout.activity_main);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
 
-    class BtnOnClickListener implements Button.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.btn_push_listener:
-                    btnPushListener(v);
-                    break;
-                default:
-                    break;
-            }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.options:
+                Intent intent = new Intent(this, PreferencesActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
         }
 
-        void btnPushListener(View v) {
-            final String CHANNEL_ID = "main";
-
-            final NotificationImpl noti = new NotificationImpl(MainActivity.this);
-            noti.createNotificationChannel(CHANNEL_ID, "알림 채널", "테스트용 알림 채널");
-            Button btn = findViewById(R.id.push_btn);
-            final Intent intent = new Intent(MainActivity.this, UserPromptActivity.class);
-
-
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0, intent, 0);
-
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.notification_icon)
-                    .setContentTitle("Dra")
-                    .setContentText("오늘의 기분은 어떠신가요?")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    // Set the intent that will fire when the user taps the notification
-                    .setContentIntent(pendingIntent)
-                    .setAutoCancel(true);
-
-            noti.notify("test", builder.build());
-        }
+        return super.onOptionsItemSelected(item);
     }
 }
