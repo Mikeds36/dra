@@ -1,4 +1,4 @@
-package xyz.bcfriends.dra;
+package xyz.bcfriends.dra.util;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
-import xyz.bcfriends.dra.util.AlarmPresenter;
+import xyz.bcfriends.dra.DailyAlarmReceiver;
 
 import java.util.Objects;
 

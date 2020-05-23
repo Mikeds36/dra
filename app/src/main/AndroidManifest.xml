@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <receiver android:name=".DailyAlarmReceiver" />
-        <receiver android:name=".DeviceBootReceiver"
+        <receiver android:name=".util.DeviceBootReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
