@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory android:title="정기 알림">
         <SwitchPreference
             android:key="alarm_daily"
@@ -36,6 +33,4 @@
             android:key="debug"
             android:title="Debug" />
     </PreferenceCategory>
-
-
 </PreferenceScreen>
