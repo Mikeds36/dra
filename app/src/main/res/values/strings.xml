@@ -3,9 +3,24 @@
     <string name="channel_name">알림 채널</string>
     <string name="channel_description">테스트용 알림 채널</string>
     <string name="apply">Apply</string>
+
     <string name="DGone">1</string>
     <string name="DGtwo">2</string>
     <string name="DGthree">3</string>
     <string name="DGfour">4</string>
+
     <string name="hello_world">Hello World! :3</string>
+
+    <!-- NavBar -->
+    <string name="nav_header_desc">Navigation Header</string>
+    <string name="nav_header_title">DRA</string>
+    <string name="nav_header_subtitle">Something</string>
+
+    <string name="menu_stat">통계</string>
+    <string name="menu_share">공유하기</string>
+    <string name="more">더보기</string>
+    <string name="content_description_more">더보기</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
