@@ -12,5 +12,11 @@
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"
             android:title="@string/menu_share" />
+        <item
+            android:id="@+id/testFragment"
+            android:title="testFragment" />
+        <item
+            android:id="@+id/notiFragment"
+            android:title="notiFragment" />
     </group>
 </menu>

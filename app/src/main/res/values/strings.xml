@@ -2,6 +2,7 @@
     <string name="app_name">dra</string>
     <string name="channel_name">알림 채널</string>
     <string name="channel_description">테스트용 알림 채널</string>
+    <string name="action_settings">옵션</string>
     <string name="apply">Apply</string>
 
     <string name="DGone">1</string>
@@ -20,6 +21,9 @@
     <string name="menu_share">공유하기</string>
     <string name="more">더보기</string>
     <string name="content_description_more">더보기</string>
+
+    <string name="open">열기</string>
+    <string name="close">닫기</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

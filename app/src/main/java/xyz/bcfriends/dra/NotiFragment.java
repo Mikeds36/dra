@@ -59,6 +59,6 @@ public class NotiFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.activity_main, container, false);
+        return v;
     }
 }

@@ -9,10 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NavMenu"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Transparent">
+        <activity android:name=".TestFragment"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_main"
-    app:startDestination="@id/notiFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@+id/testFragment">
+
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="xyz.bcfriends.dra.TestFragment"
+        android:label="TestFragment"
+        tools:layout="@layout/test_fragment">
+        <action
+            android:id="@+id/action_testFragment_to_notiFragment"
+            app:destination="@id/notiFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/notiFragment"
         android:name="xyz.bcfriends.dra.NotiFragment"
-        android:label="NotiFragment" />
+        android:label="NotiFragment"
+        tools:layout="@layout/notification_fragment">
+        <action
+            android:id="@+id/action_notiFragment_to_testFragment2"
+            app:destination="@id/testFragment" />
+    </fragment>
+
 </navigation>
