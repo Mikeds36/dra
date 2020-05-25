@@ -12,6 +12,12 @@
 
     <string name="hello_world">Hello World! :3</string>
 
+    <string name="feeling_bad">Feeling_Bad</string>
+    <string name="feeling_sad">Feeling_Sad</string>
+    <string name="feeling_normal">Feeling_Normal</string>
+    <string name="feeling_good">Feeling_Good</string>
+    <string name="feeling_nice">Feeling_Nice</string>
+
     <!-- NavBar -->
     <string name="nav_header_desc">Navigation Header</string>
     <string name="nav_header_title">DRA</string>
