@@ -5,9 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Date;
 import java.util.Locale;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
@@ -19,13 +22,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COL_3 = "depressStatus";
     public static final String COL_4 = "note";
 
-    public static final Integer BAD = 1;
-    public static final Integer SAD = 2;
-    public static final Integer NORMAL = 3;
-    public static final Integer GOOD = 4;
-    public static final Integer NICE = 5;
+    public static DataBaseHelper getInstance(Context context) {
+        return new DataBaseHelper(context);
+    }
 
-    public DataBaseHelper(Context context) {
+    private DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -34,7 +35,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         date DEFAULT date(now, localtime),
         datetime DEFAULT datetime(now, localtime),
         depressStatus INT(1)
-        note TEXT
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -42,8 +42,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "(" +
                 "date DEFAULT (date('now', 'localtime')) PRIMARY KEY, " +
                 "datetime DEFAULT (datetime('now', 'localtime'))," +
-                "depressStatus int(1), " +
-                "note TEXT" +
+                "depressStatus int(1) " +
                 ")"
         );
     }
@@ -54,24 +53,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    void insertDepressStatus(Integer depressStatus) {
+    void insertDepressStatus(LocalDate date, Integer depressStatus) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        contentValues.put(COL_1, String.valueOf(date));
         contentValues.put(COL_3, String.valueOf(depressStatus));
 
         long result = db.insert(TABLE_NAME, null, contentValues);
-
     }
 
-    boolean insertDepressStatus(Integer depressStatus, String note) {
+    boolean insertDepressStatus(Integer depressStatus) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         contentValues.put(COL_3, String.valueOf(depressStatus));
-        contentValues.put(COL_4, note);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
@@ -82,7 +79,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getData(LocalDate startDate, LocalDate endDate) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE date > " + startDate + " AND date < " + endDate, null);
+//        Log.d("Date Debug", String.valueOf(startDate));
+//        Log.d("Date Debug", String.valueOf(endDate));
+        // yyyy-MM-dd > yyyy-MM-dd
+
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE date BETWEEN strftime('" + startDate + "', 'now') AND strftime('" + endDate + "', 'now');", null);
     }
 
     public boolean updateNote(LocalDate date, String note) {

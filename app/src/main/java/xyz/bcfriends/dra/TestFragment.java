@@ -7,8 +7,12 @@ import androidx.fragment.app.Fragment;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,39 +51,68 @@ public class TestFragment extends Fragment {
         List<EventDay> events = new ArrayList<>();
 
         try {
-            DataBaseHelper dbh = new DataBaseHelper(getActivity());
+            DataBaseHelper dbh = DataBaseHelper.getInstance(requireActivity());
 
             LocalDate ld = LocalDate.now();
-            ld.with(TemporalAdjusters.firstDayOfMonth());
 
             Cursor res = dbh.getData(ld.with(TemporalAdjusters.firstDayOfMonth()), ld.with(TemporalAdjusters.lastDayOfMonth()));
+
+            ld.with(TemporalAdjusters.firstDayOfMonth());
 
             String date;
             String datetime;
             int depressStatus;
-            String note;
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
             SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
+            calendarView.setDate(calendar);
+
+//          Add Event
             while (res.moveToNext()) {
+                Drawable da;
+                int drawable;
                 date = res.getString(res.getColumnIndex("date"));
                 datetime = res.getString(res.getColumnIndex("datetime"));
                 depressStatus = res.getInt(res.getColumnIndex("depressStatus"));
-                note = res.getString(res.getColumnIndex("note"));
+
+                Log.d("Date Debug", date);
 
                 LocalDate dbLD = LocalDate.parse(date);
 
-                calendar.set(dbLD.getYear(), dbLD.getMonthValue(), dbLD.getDayOfMonth());
+                calendar.set(dbLD.getYear(), dbLD.getMonthValue() - 1, dbLD.getDayOfMonth());
 
-                events.add(new EventDay(calendar, R.drawable.notification_icon));
+                switch (depressStatus) {
+                    case DepressStatus.BAD:
+                        drawable = R.drawable.bs_checkbox_feeling_bad;
+                        break;
+                    case DepressStatus.SAD:
+                        drawable = R.drawable.bs_checkbox_feeling_sad;
+                        break;
+                    case DepressStatus.NORMAL:
+                        drawable = R.drawable.bs_checkbox_feeling_normal;
+                        break;
+                    case DepressStatus.GOOD:
+                        drawable = R.drawable.bs_checkbox_feeling_good;
+                        break;
+                    case DepressStatus.NICE:
+                        drawable = R.drawable.bs_checkbox_feeling_nice;
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + depressStatus);
+                }
+                da = getResources().getDrawable(drawable, null);
+                da.setTint(Color.BLUE);
+
+                events.add(new EventDay((Calendar) calendar.clone(), da));
             }
 
-            calendarView.setDate(calendar);
+            Log.d("Date Debug", String.valueOf(events.size()));
+
             calendarView.setEvents(events);
 
             calendarView.setOnDayClickListener(eventDay -> {
-                BottomSheetDialog bottomSheetDialog = BottomSheetDialog.getInstance();
+                BottomSheetDialog bottomSheetDialog = BottomSheetDialog.getInstance(eventDay);
 
                 bottomSheetDialog.show(requireActivity().getSupportFragmentManager(), "bottomSheet");
             });
