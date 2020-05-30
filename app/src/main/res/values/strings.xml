@@ -11,7 +11,6 @@
     <string name="DGfour">4</string>
 
     <string name="hello_world">Hello World! :3</string>
-
     <string name="feeling_bad">Feeling_Bad</string>
     <string name="feeling_sad">Feeling_Sad</string>
     <string name="feeling_normal">Feeling_Normal</string>
@@ -33,4 +32,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="options">옵션</string>
+    <string name="debug_message">This is a debug activity</string>
 </resources>
