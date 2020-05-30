@@ -51,11 +51,14 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
                 hourOfDay = cal.get(Calendar.HOUR_OF_DAY);
                 minute = cal.get(Calendar.MINUTE);
 
-                TimePickerDialog dialog = new TimePickerDialog(requireActivity(), (view, hourOfDay1, minute1) -> {
-                    Calendar cal1 = Calendar.getInstance();
-                    cal1.set(Calendar.HOUR_OF_DAY, hourOfDay1);
-                    cal1.set(Calendar.MINUTE, minute1);
-                    presenter.scheduleAlarm(cal1);
+                TimePickerDialog dialog = new TimePickerDialog(requireActivity(), new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        cal.set(Calendar.MINUTE, minute);
+                        presenter.scheduleAlarm(cal);
+                    }
                 }, hourOfDay, minute, false);
 
                 dialog.show();

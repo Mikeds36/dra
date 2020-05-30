@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 public class BottomSheetDialog extends BottomSheetDialogFragment {
 
-    private EventDay eventDay;
+    private final EventDay eventDay;
 
     public static BottomSheetDialog getInstance(EventDay ed) {
         return new BottomSheetDialog(ed);
