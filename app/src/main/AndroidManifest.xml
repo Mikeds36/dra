@@ -15,7 +15,7 @@
         <activity
             android:name=".UserPromptActivity"
             android:theme="@style/Transparent" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:theme="@style/AppFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
