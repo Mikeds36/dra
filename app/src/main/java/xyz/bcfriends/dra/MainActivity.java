@@ -1,9 +1,11 @@
 package xyz.bcfriends.dra;
 
+import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.Menu;
-
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,14 +13,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import android.content.Intent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-
 import com.google.android.material.navigation.NavigationView;
 
 import static androidx.navigation.ui.NavigationUI.navigateUp;

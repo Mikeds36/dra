@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.core.app.NotificationCompat;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+import androidx.core.app.NotificationCompat;
+import androidx.fragment.app.Fragment;
 
 public class NotiFragment extends Fragment {
     private static final String CHANNEL_ID = "main";
@@ -39,24 +36,21 @@ public class NotiFragment extends Fragment {
         Button btn = v.findViewById(R.id.push_btn);
         final Intent intent = new Intent(mainActivity, MainActivity.class);
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Activity mainActivity = requireActivity();
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                PendingIntent pendingIntent = PendingIntent.getActivity(mainActivity, 0, intent, 0);
+        btn.setOnClickListener(v1 -> {
+            Activity mainActivity1 = requireActivity();
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(mainActivity1, 0, intent, 0);
 
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(mainActivity, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.notification_icon)
-                        .setContentTitle("Dra")
-                        .setContentText("오늘의 기분은 어떠신가요?")
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        // Set the intent that will fire when the user taps the notification
-                        .setContentIntent(pendingIntent)
-                        .setAutoCancel(true);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(mainActivity1, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.notification_icon)
+                    .setContentTitle("Dra")
+                    .setContentText("오늘의 기분은 어떠신가요?")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    // Set the intent that will fire when the user taps the notification
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true);
 
-                noti.notify("test", builder.build());
-            }
+            noti.notify("test", builder.build());
         });
 
         return v;

@@ -1,7 +1,7 @@
 package xyz.bcfriends.dra;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PreferencesActivity extends AppCompatActivity {
 

@@ -5,12 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
-import java.util.Date;
 import java.util.Locale;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
