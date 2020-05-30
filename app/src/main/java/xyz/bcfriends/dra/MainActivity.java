@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private DrawerLayout drawer;
 
-    // TODO: Draft PR
+    // TODO: Draft
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
