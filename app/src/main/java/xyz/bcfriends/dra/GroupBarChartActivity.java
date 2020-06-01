@@ -34,15 +34,15 @@ public class GroupBarChartActivity extends AppCompatActivity {
 
         some();
 
-        BarDataSet barDataSet1 = new BarDataSet(barEntries1,"1주차");
+        BarDataSet barDataSet1 = new BarDataSet(barEntries1,"우울함");
         barDataSet1.setColor(Color.RED);
-        BarDataSet barDataSet2 = new BarDataSet(barEntries2,"2주차");
+        BarDataSet barDataSet2 = new BarDataSet(barEntries2,"슬픔");
         barDataSet2.setColor(Color.BLUE);
-        BarDataSet barDataSet3 = new BarDataSet(barEntries3,"3주차");
+        BarDataSet barDataSet3 = new BarDataSet(barEntries3,"보통");
         barDataSet3.setColor(Color.MAGENTA);
-        BarDataSet barDataSet4 = new BarDataSet(barEntries4,"3주차");
+        BarDataSet barDataSet4 = new BarDataSet(barEntries4,"좋음");
         barDataSet4.setColor(Color.GRAY);
-        BarDataSet barDataSet5 = new BarDataSet(barEntries5,"3주차");
+        BarDataSet barDataSet5 = new BarDataSet(barEntries5,"아주 좋음");
         barDataSet5.setColor(Color.GREEN);
 
         BarData data = new BarData(barDataSet1, barDataSet2, barDataSet3, barDataSet4, barDataSet5);
