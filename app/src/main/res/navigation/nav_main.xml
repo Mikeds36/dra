@@ -25,4 +25,8 @@
             app:destination="@id/testFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/action_settings"
+        android:name="xyz.bcfriends.dra.PreferencesFragment"
+        android:label="PreferencesFragment" />
 </navigation>

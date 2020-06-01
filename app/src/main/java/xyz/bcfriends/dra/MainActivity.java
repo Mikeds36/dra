@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.testFragment, R.id.notiFragment)
+                R.id.testFragment, R.id.notiFragment, R.id.action_settings)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -63,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                Intent intent = new Intent(this, PreferencesActivity.class);
-                startActivity(intent);
+                navController.navigate(R.id.action_settings);
                 break;
             default:
                 break;
