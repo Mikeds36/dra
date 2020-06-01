@@ -7,7 +7,7 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
-    tools:context="xyz.bcfriends.dra.GraphStatActivity">
+    tools:context="xyz.bcfriends.dra.GroupBarChartActivity">
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barchart"
