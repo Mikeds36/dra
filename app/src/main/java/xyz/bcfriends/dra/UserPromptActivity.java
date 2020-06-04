@@ -13,7 +13,7 @@ public class UserPromptActivity extends AppCompatActivity implements UserPromptD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_prompt);
 
-        Objects.requireNonNull(getSupportActionBar()).hide();
+//        Objects.requireNonNull(getSupportActionBar()).hide();
         UserPromptDialog dialog = new UserPromptDialog();
         dialog.show(getSupportFragmentManager(), "exampleBottomSheet");
     }
