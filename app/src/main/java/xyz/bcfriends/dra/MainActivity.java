@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private DrawerLayout drawer;
 
-    // TODO: Draft PR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
