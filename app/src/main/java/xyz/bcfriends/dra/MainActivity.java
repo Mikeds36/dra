@@ -1,6 +1,5 @@
 package xyz.bcfriends.dra;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.testFragment, R.id.notiFragment, R.id.action_settings)
+                R.id.homeFragment, R.id.PreferencesFragment)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -62,8 +61,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                navController.navigate(R.id.action_settings);
+            case R.id.action_info:
                 break;
             default:
                 break;

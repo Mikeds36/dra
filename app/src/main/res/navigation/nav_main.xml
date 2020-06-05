@@ -3,30 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/notiFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/testFragment"
-        android:name="xyz.bcfriends.dra.TestFragment"
-        android:label="TestFragment"
-        tools:layout="@layout/test_fragment">
-        <action
-            android:id="@+id/action_testFragment_to_notiFragment"
-            app:destination="@id/notiFragment" />
+        android:id="@+id/homeFragment"
+        android:name="xyz.bcfriends.dra.HomeFragment"
+        android:label="홈"
+        tools:layout="@layout/home_fragment">
     </fragment>
 
     <fragment
-        android:id="@+id/notiFragment"
-        android:name="xyz.bcfriends.dra.NotiFragment"
-        android:label="NotiFragment"
-        tools:layout="@layout/notification_fragment">
-        <action
-            android:id="@+id/action_notiFragment_to_testFragment2"
-            app:destination="@id/testFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/action_settings"
+        android:id="@+id/PreferencesFragment"
         android:name="xyz.bcfriends.dra.PreferencesFragment"
-        android:label="PreferencesFragment" />
+        android:label="설정" />
 </navigation>

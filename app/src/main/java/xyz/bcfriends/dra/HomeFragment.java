@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class TestFragment extends Fragment {
+public class HomeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
