@@ -1,5 +1,6 @@
 package xyz.bcfriends.dra;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_info:
+                Intent intent = new Intent(this, GoogleSignInActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

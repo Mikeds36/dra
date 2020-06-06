@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="xyz.bcfriends.dra">
+
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -9,19 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".GoogleSignInActivity"></activity>
         <activity android:name=".TestActivity" />
         <activity
             android:name=".UserPromptActivity"
             android:theme="@style/Transparent" />
-        <activity android:name=".MainActivity" android:theme="@style/AppFragment">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver android:name=".DailyAlarmReceiver" />
-        <receiver android:name=".util.DeviceBootReceiver"
+        <receiver
+            android:name=".util.DeviceBootReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
@@ -29,4 +36,5 @@
             </intent-filter>
         </receiver>
     </application>
+
 </manifest>
