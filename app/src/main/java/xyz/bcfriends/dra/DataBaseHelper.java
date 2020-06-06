@@ -19,8 +19,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COL_3 = "depressStatus";
     public static final String COL_4 = "note";
 
+    private static DataBaseHelper INSTANCE;
+    private static SQLiteDatabase mDatabase;
+
     public static DataBaseHelper getInstance(Context context) {
-        return new DataBaseHelper(context);
+        if (INSTANCE == null) {
+            INSTANCE = new DataBaseHelper(context);
+            mDatabase = INSTANCE.getWritableDatabase();
+        }
+
+        return INSTANCE;
     }
 
     private DataBaseHelper(Context context) {
@@ -51,54 +59,48 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     void insertDepressStatus(LocalDate date, Integer depressStatus) {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(COL_1, String.valueOf(date));
         contentValues.put(COL_3, String.valueOf(depressStatus));
 
-        long result = db.insert(TABLE_NAME, null, contentValues);
+        long result = mDatabase.insert(TABLE_NAME, null, contentValues);
     }
 
     boolean insertDepressStatus(Integer depressStatus) {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         contentValues.put(COL_3, String.valueOf(depressStatus));
 
-        long result = db.insert(TABLE_NAME, null, contentValues);
+        long result = mDatabase.insert(TABLE_NAME, null, contentValues);
 
         return result != -1;
     }
 
     // Get Data from records
     public Cursor getData(LocalDate startDate, LocalDate endDate) {
-        SQLiteDatabase db = this.getReadableDatabase();
-
 //        Log.d("Date Debug", String.valueOf(startDate));
 //        Log.d("Date Debug", String.valueOf(endDate));
         // yyyy-MM-dd > yyyy-MM-dd
 
-        return db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE date BETWEEN strftime('" + startDate + "', 'now') AND strftime('" + endDate + "', 'now');", null);
+        return mDatabase.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE date BETWEEN strftime('" + startDate + "', 'now') AND strftime('" + endDate + "', 'now');", null);
     }
 
     public boolean updateNote(LocalDate date, String note) {
-        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
         contentValues.put(COL_4, note);
-        db.update(TABLE_NAME, contentValues, "date = ?", new String[] { dateFormat.format(date) } );
+        mDatabase.update(TABLE_NAME, contentValues, "date = ?", new String[] { dateFormat.format(date) } );
 
         return true;
     }
 
     public int deleteNote(LocalDate date) {
-        SQLiteDatabase db = this.getWritableDatabase();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
-        return db.delete(TABLE_NAME, "date = ?",  new String[] { dateFormat.format(date) } );
+        return mDatabase.delete(TABLE_NAME, "date = ?",  new String[] { dateFormat.format(date) } );
     }
 
 }
