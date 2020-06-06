@@ -25,12 +25,15 @@
             />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="기타">
+    <PreferenceCategory android:title="Debug">
         <Preference
             android:key="app_info"
-            android:title="앱 정보" />
+            android:title="Show App Information" />
+        <Preference
+            android:key="get_firebase_id"
+            android:title="Get Firebase Instance ID" />
         <Preference
             android:key="debug"
-            android:title="Debug" />
+            android:title="Start TestActivity" />
     </PreferenceCategory>
 </PreferenceScreen>

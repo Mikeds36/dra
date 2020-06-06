@@ -6,11 +6,17 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import xyz.bcfriends.dra.util.AlarmPresenter;
 
 import java.text.SimpleDateFormat;
@@ -18,6 +24,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class PreferencesFragment extends PreferenceFragmentCompat {
+    private static final String TAG = "PreferencesFragment";
     SharedPreferences prefs;
 
     @Override
@@ -69,6 +76,27 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
                 builder.setPositiveButton("OK", null);
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
+                break;
+            case "get_firebase_id":
+                FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        String token = task.getResult().getToken();
+
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+                        builder.setTitle("InstanceID").setMessage(token);
+                        builder.setPositiveButton("OK", null);
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                });
                 break;
             case "debug":
                 Intent intent = new Intent(requireActivity(), TestActivity.class);
