@@ -10,6 +10,8 @@ import android.util.Log;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -44,6 +46,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
         final AlarmPresenter presenter = new AlarmPresenter(requireActivity(), prefs, pendingIntent);
 
         switch (preference.getKey()) {
+            case "google_login":
+                Intent intent = new Intent(requireActivity(), GoogleSignInActivity.class);
+                startActivity(intent);
+                break;
             case "alarm_daily":
                 if (prefs.getBoolean("alarm_daily", false)) {
                     presenter.scheduleAlarm();
@@ -110,7 +116,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
                 });
                 break;
             case "debug":
-                Intent intent = new Intent(requireActivity(), TestActivity.class);
+                intent = new Intent(requireActivity(), TestActivity.class);
                 startActivity(intent);
                 break;
             default:

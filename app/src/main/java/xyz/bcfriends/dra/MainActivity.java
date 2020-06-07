@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -14,6 +15,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.concurrent.ExecutionException;
 
 import static androidx.navigation.ui.NavigationUI.navigateUp;
 
@@ -61,9 +64,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_info:
-                Intent intent = new Intent(this, GoogleSignInActivity.class);
-                startActivity(intent);
+            case R.id.action_find_device:
+                FindPiDevice controller = new FindPiDevice();
+                try {
+                    String response = controller.execute().get();
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Result").setMessage(response);
+                    builder.setPositiveButton("OK", null);
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                } catch (ExecutionException | InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 break;
