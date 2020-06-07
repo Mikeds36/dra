@@ -51,4 +51,30 @@ public class FirestoreManager {
                     }
                 });
     }
+
+    void FSWriteData(int depressStatus) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("depressStatus", depressStatus);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+        String today = format.format(new Date());
+
+        mDatabase.collection("users")
+            .document(mUser.getUid())
+            .collection("Records")
+            .document(today)
+            .set(data)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error writing document", e);
+                }
+            });
+    }
+
 }
